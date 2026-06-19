@@ -27,7 +27,7 @@ export const ModuleCard = ({ title, description, buttonText, iconName, navigateT
         {description}
       </p>
       
-      <Button onClick={() => navigate(navigateTo)}>
+      <Button className="w-full" onClick={() => navigate(navigateTo)}>
         {buttonText}
       </Button>
     </div>

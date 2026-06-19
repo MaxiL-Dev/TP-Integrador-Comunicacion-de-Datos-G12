@@ -8,16 +8,18 @@ interface Option {
 interface SelectInputProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
   options: Option[];
+  icon?: string; 
 }
 
-export const SelectInput = ({ label, options, className = '', ...props }: SelectInputProps) => {
+export const SelectInput = ({ label, options, icon, className = '', ...props }: SelectInputProps) => {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
-      <label className="text-xs font-semibold tracking-wide text-zinc-400 uppercase">
+      <label className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-zinc-400 uppercase">
+        {icon && <span className="material-symbols-outlined text-sm">{icon}</span>}
         {label}
       </label>
       <div className="relative">
-        <select 
+        <select
           className="w-full appearance-none bg-[#101010] border border-zinc-800 rounded-lg py-3 px-4 text-sm text-zinc-200 focus:outline-none focus:border-zinc-600 cursor-pointer"
           {...props}
         >

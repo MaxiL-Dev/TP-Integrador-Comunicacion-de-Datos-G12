@@ -4,7 +4,6 @@ export const useAudioProcessor = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   
-  // ✅ 1. Agregamos el estado para guardar el archivo crudo (Blob)
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null); 
   
   const [analyserNode, setAnalyserNode] = useState<AnalyserNode | null>(null);
@@ -18,7 +17,6 @@ export const useAudioProcessor = () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       
-      // Mantenemos el tipado estricto que habíamos arreglado
       audioContextRef.current = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
       
       const analyser = audioContextRef.current.createAnalyser();
@@ -37,7 +35,6 @@ export const useAudioProcessor = () => {
       mediaRecorderRef.current.onstop = () => {
         const blob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
         
-        // ✅ 2. Guardamos el Blob en el estado cuando termina de grabar
         setAudioBlob(blob);
         
         const url = URL.createObjectURL(blob);
@@ -69,6 +66,6 @@ export const useAudioProcessor = () => {
     stopRecording,
     analyserNode,
     audioUrl,
-    audioBlob // ✅ 3. Finalmente, lo exportamos para que AudioPage lo pueda usar
+    audioBlob
   };
 };

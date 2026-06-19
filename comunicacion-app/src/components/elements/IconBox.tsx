@@ -1,4 +1,3 @@
-// src/components/ui/IconBox.tsx
 import { type ReactNode } from 'react';
 
 interface IconBoxProps {

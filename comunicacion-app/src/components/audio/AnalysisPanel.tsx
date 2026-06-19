@@ -104,7 +104,6 @@ export const AnalysisPanel = ({ originalData, processedData, estimatedSizeMB, pr
             <span className="text-xs font-medium text-zinc-500">Tamaño (PCM)</span>
             <span className="text-lg font-bold text-zinc-100">{estimatedSizeMB} MB</span>
           </div>
-          {/* El estado fue eliminado de aquí */}
         </div>
         <div className="flex gap-4">
           <button 
@@ -113,7 +112,7 @@ export const AnalysisPanel = ({ originalData, processedData, estimatedSizeMB, pr
             className="cursor-pointer flex items-center gap-2 px-6 py-2.5 rounded-md bg-[#a8c7fa] hover:bg-[#90b6f8] text-zinc-950 font-medium text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span className="material-symbols-outlined text-xl">download</span>
-            Exportar Demo
+            Exportar
           </button>
         </div>
       </div>

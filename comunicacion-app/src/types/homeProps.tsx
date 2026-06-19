@@ -1,3 +1,4 @@
+// src/types/homeProps.tsx
 export interface ModuleData {
   id: string;
   title: string;
@@ -10,17 +11,17 @@ export interface ModuleData {
 export const homeModulesData: ModuleData[] = [
   {
     id: 'audio-converter',
-    title: "Convertidor de Audio",
-    description: "Procesamiento de audio multiformato con algoritmos de reducción de ruido y normalización de picos.",
-    buttonText: "Iniciar Conversión",
+    title: "Conversor de Audio Analógico-Digital",
+    description: "Grabá audio desde tu micrófono y compará en tiempo real cómo la frecuencia de muestreo y la profundidad de bits afectan la calidad y el peso del archivo.",
+    buttonText: "Grabar y Analizar",
     iconName: "mic", 
     navigateTo: "/audio"
   },
   {
     id: 'image-digitizer',
     title: "Digitalización de Imágenes",
-    description: "Restauración y escalado de imágenes mediante IA. Mejora la claridad y el detalle de archivos antiguos.",
-    buttonText: "Digitalizar Archivo",
+    description: "Subí una imagen y mirá en tiempo real cómo la resolución y la profundidad de color afectan su calidad visual y el peso final del archivo.",
+    buttonText: "Digitalizar Imagen",
     iconName: "image", 
     navigateTo: "/imagen"
   }

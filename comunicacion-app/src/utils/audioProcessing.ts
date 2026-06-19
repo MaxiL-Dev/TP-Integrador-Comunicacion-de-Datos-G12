@@ -1,5 +1,3 @@
-// src/utils/audioProcessing.ts
-
 export const calculatePCMSize = (durationSeconds: number, sampleRate: number, bitDepth: number, channels: number = 1): number => {
   return durationSeconds * sampleRate * (bitDepth / 8) * channels;
 };
@@ -9,7 +7,7 @@ export const blobToAudioBuffer = async (blob: Blob, audioContext: AudioContext):
   return await audioContext.decodeAudioData(arrayBuffer);
 };
 
-// Codificador nativo a WAV (PCM 16-bit)
+
 const encodeWAV = (samples: Float32Array, sampleRate: number): Blob => {
   const buffer = new ArrayBuffer(44 + samples.length * 2);
   const view = new DataView(buffer);
@@ -25,8 +23,8 @@ const encodeWAV = (samples: Float32Array, sampleRate: number): Blob => {
   writeString(8, 'WAVE');
   writeString(12, 'fmt ');
   view.setUint32(16, 16, true);
-  view.setUint16(20, 1, true); // PCM
-  view.setUint16(22, 1, true); // Mono
+  view.setUint16(20, 1, true); 
+  view.setUint16(22, 1, true); 
   view.setUint32(24, sampleRate, true);
   view.setUint32(28, sampleRate * 2, true);
   view.setUint16(32, 2, true);
@@ -49,7 +47,6 @@ export const processAudioBuffer = async (
   targetBitDepth: number
 ): Promise<{ originalData: number[]; processedData: number[]; processedBlob: Blob }> => {
   
-  // 1. Remuestreo
   const offlineCtx = new OfflineAudioContext(1, originalBuffer.duration * targetSampleRate, targetSampleRate);
   const source = offlineCtx.createBufferSource();
   source.buffer = originalBuffer;
@@ -60,13 +57,11 @@ export const processAudioBuffer = async (
   const channelData = resampledBuffer.getChannelData(0);
   const originalChannelData = originalBuffer.getChannelData(0);
 
-  // 2. Cuantización
   const maxLevel = Math.pow(2, targetBitDepth - 1) - 1;
   for (let i = 0; i < channelData.length; i++) {
     channelData[i] = Math.round(channelData[i] * maxLevel) / maxLevel;
   }
 
-  // 3. Zoom inteligente (RMS Energy)
   const energyChunkSize = Math.floor(originalBuffer.sampleRate * 0.05); 
   let maxEnergy = 0;
   let bestChunkIndex = 0;

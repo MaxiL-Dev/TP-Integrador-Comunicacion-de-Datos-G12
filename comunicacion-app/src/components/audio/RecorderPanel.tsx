@@ -20,23 +20,20 @@ export const RecorderPanel = ({ isRecording, onToggleRecord, analyserNode, audio
   // Estado para el cronómetro (centésimas de segundo)
   const [recordingTime, setRecordingTime] = useState(0);
 
-  // ----------------------------------------------------------------
-  // 1. LÓGICA DEL CRONÓMETRO (Centésimas)
-  // ----------------------------------------------------------------
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
 
     if (isRecording) {
       interval = setInterval(() => {
         setRecordingTime((prev) => {
-          // 10 segundos * 100 centésimas = 1000
+
           if (prev >= 1000) {
-            onToggleRecord(); // Dispara el stop al llegar a 10s
+            onToggleRecord(); 
             return 1000;
           }
           return prev + 1;
         });
-      }, 10); // Intervalo de 10ms
+      }, 10);
     }
 
     return () => {
@@ -44,14 +41,10 @@ export const RecorderPanel = ({ isRecording, onToggleRecord, analyserNode, audio
     };
   }, [isRecording, onToggleRecord]);
 
-  // ----------------------------------------------------------------
-  // 2. MANEJADORES DE EVENTOS (Evitamos renders innecesarios)
-  // ----------------------------------------------------------------
   const handleRecordClick = () => {
     if (!isRecording) {
-      setRecordingTime(0); // Reseteamos el tiempo aquí, al iniciar
+      setRecordingTime(0); 
       
-      // Detenemos audio previo si existe
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
@@ -72,11 +65,9 @@ export const RecorderPanel = ({ isRecording, onToggleRecord, analyserNode, audio
     }
   };
 
-  // ----------------------------------------------------------------
-  // 3. LÓGICA DE REPRODUCCIÓN
-  // ----------------------------------------------------------------
+
   useEffect(() => {
-  // Si había un audio reproduciéndose con la config anterior, lo paramos
+
     if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
@@ -89,18 +80,12 @@ export const RecorderPanel = ({ isRecording, onToggleRecord, analyserNode, audio
     }
 }, [audioUrl]);
 
-  // ----------------------------------------------------------------
-  // 4. FORMATO DE TIEMPO
-  // ----------------------------------------------------------------
   const formatTime = (time: number) => {
     const seconds = Math.floor(time / 100);
     const centiseconds = time % 100;
     return `${seconds.toString().padStart(2, '0')}.${centiseconds.toString().padStart(2, '0')}`;
   };
 
-  // ----------------------------------------------------------------
-  // 5. LÓGICA DEL CANVAS
-  // ----------------------------------------------------------------
   useEffect(() => {
     if (!canvasRef.current || !analyserNode || !isRecording) return;
 
@@ -149,7 +134,6 @@ export const RecorderPanel = ({ isRecording, onToggleRecord, analyserNode, audio
     <Card className="flex items-center gap-6 p-8">
       <div className="flex flex-col gap-4">
         
-        {/* Botón de Grabar / Parar */}
         <IconButton 
           iconName="fiber_manual_record" 
           variant="record" 
@@ -158,7 +142,6 @@ export const RecorderPanel = ({ isRecording, onToggleRecord, analyserNode, audio
         />
         
         <div className="flex gap-2 justify-center">
-          {/* Botón Único de Play / Pause */}
           <IconButton 
             iconName={isPlaying ? 'pause' : 'play_arrow'} 
             variant="secondary" 

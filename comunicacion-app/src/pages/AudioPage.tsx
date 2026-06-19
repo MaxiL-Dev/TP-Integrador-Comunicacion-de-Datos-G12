@@ -15,7 +15,6 @@ export const AudioPage = () => {
   const [processedData, setProcessedData] = useState<number[]>([]);
   const [estimatedSize, setEstimatedSize] = useState<string>("0.00");
   
-  // NUEVO: Guardamos la URL del WAV generado
   const [processedBlobUrl, setProcessedBlobUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -26,7 +25,6 @@ export const AudioPage = () => {
         const audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
         const originalBuffer = await blobToAudioBuffer(audioBlob, audioContext);
         
-        // Obtenemos los gráficos y el archivo WAV comprimido
         const { originalData, processedData, processedBlob } = await processAudioBuffer(originalBuffer, sampleRate, bitDepth);
         
         const bytes = calculatePCMSize(originalBuffer.duration, sampleRate, bitDepth, originalBuffer.numberOfChannels);
@@ -36,7 +34,6 @@ export const AudioPage = () => {
         setProcessedData(processedData);
         setEstimatedSize(megabytes);
         
-        // Creamos la URL para que el botón descargar funcione
         if (processedBlobUrl) URL.revokeObjectURL(processedBlobUrl);
         setProcessedBlobUrl(URL.createObjectURL(processedBlob));
         
@@ -47,7 +44,6 @@ export const AudioPage = () => {
 
     runProcessing();
     
-    // Limpieza al desmontar
     return () => {
       if (processedBlobUrl) URL.revokeObjectURL(processedBlobUrl);
     };
