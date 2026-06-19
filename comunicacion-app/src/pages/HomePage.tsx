@@ -1,4 +1,4 @@
-import { ModuleCard } from '../components/ModuleCard';
+import { ModuleCard } from '../components/home/ModuleCard';
 import { homeModulesData } from './../types/homeProps';
 
 export const HomePage = () => {

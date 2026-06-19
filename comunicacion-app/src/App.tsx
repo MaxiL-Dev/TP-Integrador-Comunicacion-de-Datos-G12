@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { HomePage } from './pages/HomePage';
+import { AudioPage } from './pages/AudioPage';
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/audio" element={<div>Vista de Audio (En construcción)</div>} />
+          <Route path="/audio" element={<AudioPage />} />
           <Route path="/imagen" element={<div>Vista de Imágenes (En construcción)</div>} />
         </Route>
       </Routes>

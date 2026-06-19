@@ -12,7 +12,6 @@
   }
 }
 
-/* Forzamos al navegador a usar la tipografía del ícono y activar las ligaduras */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined' !important;
   font-feature-settings: 'liga' !important;

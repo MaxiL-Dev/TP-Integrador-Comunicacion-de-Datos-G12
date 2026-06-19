@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from './elements/Button';
-import { IconBox } from './elements/IconBox';
+import { Button } from '../elements/Button';
+import { IconBox } from '../elements/IconBox';
 
 interface ModuleCardProps {
   title: string;
