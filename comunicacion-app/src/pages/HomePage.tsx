@@ -7,7 +7,7 @@ export const HomePage = () => {
         
       {/* Hero Section */}
       <div className="mb-16">
-        <h1 className="text-4xl md:text-[2.75rem] font-serif font-bold text-zinc-100 mb-4 tracking-wide">
+        <h1 className="text-4xl md:text-[2.75rem] font-display font-bold text-zinc-100 mb-4 tracking-wide">
           Trabajo Integrador - Comunicación de Datos
         </h1>
         <p className="text-zinc-300 text-sm md:text-base">
@@ -23,7 +23,7 @@ export const HomePage = () => {
             title={module.title}
             description={module.description}
             buttonText={module.buttonText}
-            iconClass={module.iconClass}
+            iconName={module.iconName}
             navigateTo={module.navigateTo}
           />
         ))}
